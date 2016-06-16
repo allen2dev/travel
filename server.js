@@ -1,22 +1,31 @@
-/**
- * Created by thanos on 6/1/16.
- */
-var express = require('express');
-var swig = require('swig'); //导入 swig 模板引擎
+'use strict';
 
+const Hapi = require('hapi');
 
-var app = express();
-app.use(express.static(__dirname + '/public'));
+const server = new Hapi.Server();
+server.connection({ port: 3000 });
 
-// Swig 模板引擎设置
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/public/views');
+server.register(require('inert'), (err) => {
 
-app.get('/', function (req, res) {
-    res.render('index', { /* template locals context */ });
+    if (err) {
+        throw err;
+    }
+
+    server.route({
+        method: 'GET',
+        path: '/hello',
+        handler: function (request, reply) {
+            reply.file('./public/hello.html');
+        }
+    });
 });
 
-app.listen(3000, function () {
-    console.log('Travel app listening on port 3000!')
+
+
+server.start((err) => {
+
+    if (err) {
+        throw err;
+    }
+    console.log('Server running at:', server.info.uri);
 });
