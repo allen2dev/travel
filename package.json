@@ -1,0 +1,29 @@
+{
+  "name": "travel",
+  "version": "1.0.0",
+  "description": "一个旅行网站",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhiqiuyao/travel.git"
+  },
+  "author": "Thanos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhiqiuyao/travel/issues"
+  },
+  "homepage": "https://github.com/zhiqiuyao/travel#readme",
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "hapi": "^13.4.1",
+    "hapi-auth-basic": "^4.2.0",
+    "inert": "^4.0.0"
+  }
+}
