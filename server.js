@@ -6,42 +6,28 @@ const server = new Hapi.Server();
 
 server.connection({
     host: 'localhost',
-    port: '3000'
+    port: Number(process.argv[2] || 3000)
 });
 /*
-* 服务端路由
+* 服务端传输文件
 * */
-server.register(require('vision'), () => {
-    server.views({
-        engines: {
-            hbs: require('handlebars')
-        },
-        relativeTo: __dirname,
-        layout: true,
-        path: 'views'
-    })
-
+server.register(require('inert'), () => {
     server.route({
-        method: ['POST', 'GET'],
+        method: 'GET',
         path: '/',
         handler: function (request, reply) {
-            reply.view('index')
+            var path = Path.join(__dirname, 'public/index.html');
+            reply.file(path);
         }
-    })
+    });
 
     server.route({
         method: 'GET',
-        path: '/login',
-        handler: function (request, reply) {
-            reply.view('login')
-        }
-    })
-
-    server.route({
-        method: 'GET',
-        path: '/signup',
-        handler: function (request, reply) {
-            reply.view('signup')
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: Path.join(__dirname, 'public')
+            }
         }
     })
 });
