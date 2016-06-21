@@ -25,7 +25,23 @@ server.register(require('vision'), () => {
         method: ['POST', 'GET'],
         path: '/',
         handler: function (request, reply) {
-            reply.view('home')
+            reply.view('index')
+        }
+    })
+
+    server.route({
+        method: 'GET',
+        path: '/login',
+        handler: function (request, reply) {
+            reply.view('login')
+        }
+    })
+
+    server.route({
+        method: 'GET',
+        path: '/signup',
+        handler: function (request, reply) {
+            reply.view('signup')
         }
     })
 });
