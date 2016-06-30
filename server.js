@@ -33,4 +33,4 @@ server.register(require('inert'), () => {
 });
 
 
-server.start(() => console.log('Started at: ', server.info.uri));
+server.start(() => console.log(`Started at: ${ server.info.uri }` ));
